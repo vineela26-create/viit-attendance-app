@@ -1,4 +1,4 @@
-package com.example.app;
+package com.vineela.attendance;
 
 import com.getcapacitor.BridgeActivity;
 

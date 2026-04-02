@@ -151,49 +151,7 @@ export default function AuthPage() {
   };
 
   // GOOGLE LOGIN
-  const handleGoogle = async () => {
-    try {
-      const res = await signInWithPopup(auth, provider);
-      const email = res.user.email;
-      const uid = res.user.uid;
-      console.log("Google login UID:", uid);
-
-      // Fetch user profile from Firestore
-      const userRef = doc(db, "users", uid);
-      const userSnap = await getDoc(userRef);
-
-      if (!userSnap.exists()) {
-        console.error("User profile not found in Firestore for UID:", uid);
-        setError("User profile not found. Please signup first.");
-        await signOut(auth);
-        return;
-      }
-
-      const userData = userSnap.data();
-      console.log("Fetched user data:", userData);
-
-      const role = userData.role;
-      if (!role) {
-        console.error("No role found in user data:", userData);
-        setError("No role found. Please contact support.");
-        await signOut(auth);
-        return;
-      }
-
-      // Redirect based on role
-      if (role === "student") {
-        navigate("/student");
-      } else if (role === "faculty") {
-        navigate("/faculty/dashboard");
-      } else {
-        setError("Invalid role. Please contact support.");
-        await signOut(auth);
-      }
-    } catch (err) {
-      console.error("Google sign-in error:", err);
-      setError("Google sign-in failed.");
-    }
-  };
+  
 
   return (
     <div className="auth-page-wrapper">
@@ -280,17 +238,10 @@ export default function AuthPage() {
             {isLogin ? "Login" : "Signup"}
           </button>
         </form>
-
-        <div className="divider">OR</div>
-
-        <button className="google-btn" onClick={handleGoogle}>
-          <img
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-            alt="google"
-          />
-          Continue with Google
-        </button>
       </div>
-    </div>
+      </div>
+      
+        
+   
   );
 }

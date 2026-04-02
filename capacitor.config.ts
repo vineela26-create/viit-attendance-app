@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
-  appName: 'bus-attendance',
+  appId: 'com.vineela.attendance',
+  appName: 'Bus Attendance',
   webDir: 'build'
 };
 
