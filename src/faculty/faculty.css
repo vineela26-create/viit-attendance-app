@@ -39,17 +39,12 @@ html, body {
 }
 
 .dashboard-content {
-  margin-left: 280px;
+  width: 100%;
   margin-top: 70px;
-
-  width: calc(100% - 280px);
-  
-
-  display: flex;                /* 🔥 IMPORTANT */
-  justify-content: center;      /* 🔥 CENTER */
-  align-items: flex-start;      /* top alignment */
-
-  padding: 40px 20px;
+  margin-left: 0;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
 }
 /* ================= TOP BAR ================= */
 .faculty-topbar {
@@ -279,12 +274,10 @@ html, body {
 
 /* ================= MAIN CONTENT ================= */
 .faculty-main-content {
-  display: block;
+  width: 100%;
+  margin-left: 0;
   margin-top: 70px;
-  margin-left: 280px;   /* 🔥 FIX */
-
-  min-height: calc(100vh - 70px);
-
+  padding: 16px;
   overflow: auto;
 }
 /* ================= FACULTY DASHBOARD ================= */
@@ -319,7 +312,7 @@ html, body {
 
 .attendance-card {
   width: 100%;              /* full available width */
-  max-width: 1200px;        /* limit for large screens */
+  max-width: 100%;      /* limit for large screens */
   margin: 40px auto;
   padding: 20px;
   border-radius: 20px;
@@ -400,7 +393,7 @@ html, body {
 /* ===== MAIN PAGE ===== */
 .scan-attendance-page {
   width: 100%;
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 30px 20px;
   box-sizing: border-box;
@@ -460,16 +453,16 @@ html, body {
 }
 
 /* ===== MANUAL ATTENDANCE CARD ===== */
-.manual-attendance-card {
-  width: 100%;
-  margin-top: 20px;
-  padding: 30px;
+.manual-entry-card {
   background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  text-align: center;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
-
 .manual-attendance-card h2 {
   font-size: 22px;
   color: #1e3a8a;
@@ -854,9 +847,10 @@ html, body {
 .total-attendance-card {
   background: white;
   border-radius: 16px;
-  width: 800px;
+  width: 100%;
+  max-width: 100%;
   padding: 20px;
-  margin: 12px 20px;
+  margin: 12px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
@@ -1027,83 +1021,239 @@ html, body {
 }
 
 /* ================= RESPONSIVE ================= */
+/* ================= RESPONSIVE ================= */
+
 @media (max-width: 1024px) {
+
   .faculty-sidebar {
-    width: 240px;
+    width: 90px;
+    padding: 15px 8px;
   }
-  
+
+  .faculty-sidebar .label,
+  .faculty-sidebar .arrow,
+  .faculty-label,
+  .faculty-id,
+  .faculty-sidebar h3 {
+    display: none;
+  }
+
+  .faculty-sidebar .profile-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dashboard-content,
+  .faculty-main-content,
   .main-content {
-    margin-left: 240px;
+    width: calc(100% - 90px) !important;
+    margin-left: 90px !important;
+    padding: 12px !important;
   }
 }
 
 @media (max-width: 768px) {
+
   .faculty-topbar {
-    padding: 0 20px;
+    padding: 0 12px;
+    height: 60px;
   }
-  
+
   .faculty-topbar h2 {
-    font-size: 16px;
+    font-size: 15px;
   }
-  
+
   .faculty-topbar img {
-    height: 40px;
+    height: 34px;
   }
-  
+
   .faculty-sidebar {
-    width: 200px;
-    padding: 20px 12px;
+    width: 75px;
+    padding: 12px 6px;
   }
-  
+
+  .faculty-sidebar .label,
+  .faculty-sidebar .arrow,
+  .faculty-label,
+  .faculty-id,
+  .faculty-sidebar h3 {
+    display: none;
+  }
+
+  .faculty-sidebar .profile-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .faculty-sidebar .sidebar-btn,
+  .faculty-sidebar .logout-btn {
+    justify-content: center !important;
+    padding: 0 !important;
+    width: 55px !important;
+    height: 55px !important;
+    margin: 10px auto !important;
+  }
+
+  .dashboard-wrapper,
+  .dashboard-content,
+  .faculty-main-content,
   .main-content {
-    margin-left: 200px;
+    width: calc(100% - 75px) !important;
+    margin-left: 75px !important;
+    padding: 10px !important;
+    overflow-x: hidden !important;
   }
-  
+
   .stats-grid,
-  .quick-actions-grid,
-  .scan-options,
   .summary-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
-  
-  .attendance-overview-card,
-  .quick-actions-section,
-  .student-detected-card,
+
+  .attendance-card,
+  .manual-entry-card,
   .attendance-summary-card,
   .total-attendance-card,
   .records-table-container,
-  .pagination,
-  .camera-container,
-  .manual-input-section {
-    margin-left: 16px;
-    margin-right: 16px;
+  .manual-attendance-card,
+  .qr-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box;
+  }
+
+  .stat-number,
+  .summary-value {
+    font-size: 36px !important;
+  }
+
+  h1 {
+    font-size: 24px !important;
+  }
+
+  table {
+    width: 100% !important;
+    font-size: 12px !important;
+  }
+
+  th,
+  td {
+    padding: 6px !important;
+    word-break: break-word;
+  }
+
+  .qr-container svg {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 }
 
 @media (max-width: 480px) {
+
   .faculty-sidebar {
-    width: 180px;
+    width: 65px;
   }
-  
+
+  .faculty-sidebar .profile-img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .dashboard-content,
+  .faculty-main-content,
   .main-content {
-    margin-left: 180px;
+    width: calc(100% - 65px) !important;
+    margin-left: 65px !important;
+    padding: 8px !important;
   }
-  
-  .faculty-topbar h2 {
-    font-size: 14px;
-  }
-  
-  .attendance-overview-card,
-  .quick-actions-section,
-  .student-detected-card,
+
+  .attendance-card,
+  .manual-entry-card,
   .attendance-summary-card,
   .total-attendance-card,
   .records-table-container,
-  .pagination,
-  .camera-container,
+  .manual-attendance-card,
+  .qr-card {
+    padding: 12px !important;
+  }
+
+  .faculty-topbar h2 {
+    font-size: 13px;
+  }
+
+  .faculty-topbar {
+    padding: 0 10px;
+  }
+
+  .stat-number,
+  .summary-value {
+    font-size: 28px !important;
+  }
+
+  h1 {
+    font-size: 20px !important;
+  }
+}
+/* ================= EXTRA MOBILE FIX ================= */
+
+@media screen and (max-width: 768px) {
+
+  .attendance-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .records-filters,
+  .manual-entry-form,
   .manual-input-section {
-    margin-left: 8px;
-    margin-right: 8px;
+    flex-direction: column !important;
+  }
+
+  .search-input,
+  .date-filter,
+  .manual-input,
+  .manual-entry-form input {
+    width: 100% !important;
+  }
+
+  .total-attendance-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .qr-container svg {
+    width: 160px !important;
+    height: 160px !important;
   }
 }
 
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  z-index: 1000;
+}

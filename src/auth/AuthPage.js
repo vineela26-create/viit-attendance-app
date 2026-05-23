@@ -3,10 +3,10 @@ import "../auth.css";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPopup,
+
   signOut,
 } from "firebase/auth";
-import { auth, provider } from "../firebase/firebase";
+import { auth } from "../firebase/firebase";
 import { db } from "../firebase/firebase";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";

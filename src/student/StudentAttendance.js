@@ -32,28 +32,35 @@ const StudentAttendance = () => {
 
     if (isScanning) {
       scanner = new Html5QrcodeScanner(
-        "qr-reader",
-        { fps: 12, qrbox: { width: 180, height: 180 } },
-        false
-      );
+  "qr-reader",
+  {
+    fps: 20,
+    qrbox: { width: 220, height: 220 },
+    aspectRatio: 1.0,
+    rememberLastUsedCamera: true,
+    supportedScanTypes: [],
+  },
+  false
+);
 
       scanner.render(
-        async (decodedText) => {
-          await scanner.clear();
-          setIsScanning(false);
+  async (decodedText) => {
+    await scanner.clear();
+    setIsScanning(false);
 
-          const sessionId = extractSessionId(decodedText);
-          setSessionInput(sessionId);
-          markAttendance(sessionId);
-        },
-        () => {}
-      );
+    const sessionId = extractSessionId(decodedText);
+    setSessionInput(sessionId);
+    markAttendance(sessionId);
+  },
+  undefined
+);
     }
 
     return () => {
       if (scanner) scanner.clear().catch(() => {});
     };
-  }, [isScanning]);
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [isScanning]);
 
   // ✅ MARK ATTENDANCE
   const markAttendance = async (scannedSessionId = null) => {
@@ -163,7 +170,19 @@ const StudentAttendance = () => {
 
       {isScanning ? (
         <div style={styles.scannerWrapper}>
-          <div id="qr-reader" style={{ width: "100%", maxWidth: "400px", margin: "auto" }}></div>
+          
+         <div
+  id="qr-reader"
+  style={{
+    width: "100%",
+    maxWidth: "360px",
+    margin: "0 auto",
+    borderRadius: "20px",
+    overflow: "hidden",
+    background: "#fff",
+    padding: "10px",
+  }}
+></div>
           <button style={styles.cancelBtn} onClick={() => setIsScanning(false)}>
             Stop Scanning
           </button>
@@ -246,11 +265,14 @@ const styles = {
     fontWeight: "600",
   },
   scannerWrapper: {
-    padding: "20px",
-    background: "#fff",
-    borderRadius: "12px",
-    marginBottom: "20px",
-  },
+  width: "100%",
+  maxWidth: "420px",
+  margin: "20px auto",
+  padding: "20px",
+  background: "#fff",
+  borderRadius: "20px",
+  boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
+},
   cancelBtn: {
     marginTop: "15px",
     padding: "10px",

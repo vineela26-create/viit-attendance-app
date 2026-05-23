@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StudentProfile from "./StudentProfile";
 import StudentAttendance from "./StudentAttendance";
@@ -11,8 +11,7 @@ import { auth, db } from "../firebase/firebase";
 import {
   doc,
   getDoc,
-  setDoc,
-  serverTimestamp,
+  
 } from "firebase/firestore";
 
 export default function StudentDashboard() {

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../firebase/firebase";
 import { doc, getDoc, setDoc, arrayUnion } from "firebase/firestore";
 import QRCode from "react-qr-code";
@@ -7,8 +7,8 @@ export default function ScanAttendance() {
   const [userName, setUserName] = useState("Faculty");
   const [attendanceCode, setAttendanceCode] = useState("");
   const [sessionId, setSessionId] = useState("");
-  const [busId, setBusId] = useState("");
-  const [expiryTime, setExpiryTime] = useState("");
+  const [busId] = useState("");
+  const [,setExpiryTime] = useState("");
   const [detectedStudent, setDetectedStudent] = useState(null);
 
   const today = new Date().toLocaleDateString("en-CA");
@@ -131,16 +131,17 @@ export default function ScanAttendance() {
           background: #f1f5f9;
         }
 
-        .scan-attendance-page {
-          width: 100%;
-          max-width: 600px;
-          margin-left: 150px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
+        
+       .scan-attendance-page {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
         h1 {
           color: #1e3a8a;
           margin-bottom: 20px;

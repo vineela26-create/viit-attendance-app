@@ -149,15 +149,15 @@ export default function FullBusReport() {
 // 🎨 STYLES (UNCHANGED)
 const styles = {
   page: {
-    background: "#f4f7fb",
-    marginLeft: "220px",
-    width: "500px",
-    minHeight: "100vh",
-    padding: "40px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
+  background: "#f4f7fb",
+  width: "100%",
+  minHeight: "100vh",
+  padding: "16px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  boxSizing: "border-box",
+},
 
   title: {
     color: "#1e3a8a",
@@ -178,7 +178,7 @@ const styles = {
 
   dateCard: {
     width: "100%",
-    maxWidth: "700px",
+    maxWidth: "100%",
     background: "#fff",
     padding: "25px",
     borderRadius: "16px",
@@ -203,10 +203,13 @@ const styles = {
   },
 
   table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "10px",
-  },
+  width: "100%",
+  borderCollapse: "collapse",
+  marginTop: "10px",
+  display: "block",
+  overflowX: "auto",
+  whiteSpace: "nowrap",
+},
 
   male: {
     color: "blue",

@@ -49,9 +49,9 @@ body,
 .dashboard-body {
   display: grid;
   align-items: start;
-  grid-template-columns: 240px 1fr auto;
+  grid-template-columns: 240px 1fr 260px;
   gap: 20px;
-  
+  width: 100%;
 }
 /* Keep the middle panel using all remaining space and allow cards to grow */
 
@@ -681,17 +681,30 @@ body,
   margin-top: 5px;
 }
 .right-panel {
-  width: 260px;
-   align-self: start;
+  width: 100%;
+  max-width: 260px;
+  align-self: start;
   height: fit-content;
   flex-shrink: 0;
+
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 12px;
+
   position: sticky;
   top: 100px;
-  /* avoid scrollbars inside right panel */
+
   overflow: visible;
+}
+
+/* ===== MOBILE FIX ===== */
+
+@media screen and (max-width: 768px) {
+
+  .right-panel {
+    display: none !important;
+  }
+
 }
 
 /* ================= CALENDAR ================= */
@@ -1413,4 +1426,343 @@ body,
   border-radius: 8px;
   border: 1px solid #ccc;
   margin-bottom: 16px;
+}
+/* ================= CLEAN MOBILE APP UI ================= */
+
+@media screen and (max-width: 768px) {
+
+  body,
+  html {
+    overflow-x: hidden !important;
+  }
+
+  .dashboard-body {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* ===== SIDEBAR ===== */
+
+  .sidebar {
+    width: 72px !important;
+    min-width: 72px !important;
+    padding: 12px 6px !important;
+    overflow: hidden;
+    border-radius: 0 !important;
+  }
+
+  .sidebar h3,
+  .sidebar-regNo,
+  .sidebar-busNo,
+  .sidebar-college,
+  .edit-profile-btn,
+  .sidebar-btn .label,
+  .sidebar-btn .arrow,
+  .logout-btn .label {
+    display: none !important;
+  }
+
+  .profile-img {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 14px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .sidebar-btn,
+  .logout-btn {
+    width: 54px !important;
+    height: 54px !important;
+    margin: 10px auto !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 14px !important;
+  }
+
+  .sidebar-btn .icon,
+  .logout-btn .icon {
+    font-size: 22px !important;
+  }
+
+  /* ===== TOPBAR ===== */
+
+  .topbar {
+    height: 62px !important;
+    padding: 0 10px !important;
+  }
+
+  .topbar img {
+    height: 34px !important;
+  }
+
+  .topbar h2 {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+
+  .main-content {
+    width: calc(100% - 72px) !important;
+    max-width: calc(100% - 72px) !important;
+    margin-left: 0 !important;
+    padding: 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  .content-wrapper {
+    width: 100% !important;
+  }
+
+  /* ===== CARDS ===== */
+
+  .card,
+  .attendance-card,
+  .qr-card,
+  .qr-display-card,
+  .attendance-marking-card,
+  .profile-card,
+  .manual-entry-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px !important;
+    margin: 10px 0 !important;
+    border-radius: 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ===== HEADINGS ===== */
+
+  h1 {
+    font-size: 26px !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+  }
+
+  h2 {
+    font-size: 22px !important;
+    text-align: center !important;
+  }
+
+  h3 {
+    font-size: 18px !important;
+  }
+
+  /* ===== QR ===== */
+
+  .qr-container svg,
+  .qr-box img {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  /* ===== TABLE ===== */
+
+  .records-table-container {
+    overflow-x: auto !important;
+  }
+
+  table {
+    width: 100% !important;
+    font-size: 12px !important;
+    border-collapse: collapse !important;
+  }
+
+  th,
+  td {
+    padding: 6px !important;
+    text-align: center !important;
+    word-break: break-word !important;
+  }
+
+  /* ===== PROFILE ===== */
+
+  .profile-form input,
+  .profile-form select {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  /* ===== BUTTONS ===== */
+
+  button {
+    font-size: 14px !important;
+  }
+
+  /* ===== STATS ===== */
+
+  .attendance-stats,
+  .summary-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stat-value,
+  .summary-value {
+    font-size: 32px !important;
+  }
+}
+
+
+/* ===== EXTRA SMALL DEVICES ===== */
+
+@media screen and (max-width: 480px) {
+
+  .sidebar {
+    width: 65px !important;
+    min-width: 65px !important;
+  }
+
+  .main-content {
+    width: calc(100% - 65px) !important;
+    max-width: calc(100% - 65px) !important;
+    padding: 8px !important;
+  }
+
+  .profile-img {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .sidebar-btn,
+  .logout-btn {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .topbar h2 {
+    font-size: 13px !important;
+  }
+
+  h1 {
+    font-size: 22px !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+  }
+
+  .card,
+  .attendance-card,
+  .qr-card,
+  .qr-display-card,
+  .attendance-marking-card,
+  .profile-card {
+    padding: 12px !important;
+  }
+
+  .qr-container svg,
+  .qr-box img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+
+  th,
+  td {
+    font-size: 11px !important;
+  }
+}
+/* ================= FINAL MOBILE APP FIX ================= */
+
+
+@media screen and (max-width: 768px) {
+
+  /* ===== FIX MAIN LAYOUT ===== */
+
+  .dashboard-body {
+    display: grid !important;
+    grid-template-columns: 72px 1fr !important;
+    gap: 10px !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+
+  .content-wrapper,
+  .main-layout {
+    width: 100% !important;
+  }
+
+  /* ===== HIDE CALENDAR ON MOBILE ===== */
+
+  .right-panel {
+    display: none !important;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+
+  .main-content {
+    width: 100% !important;
+    padding: 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ===== PROFILE SECTION ===== */
+
+  .profile-section {
+    padding: 8px 0 !important;
+  }
+
+  /* ===== CARD CENTER ===== */
+
+  .attendance-card,
+  .card,
+  .profile-card,
+  .qr-card,
+  .manual-entry-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ===== TABLE FIX ===== */
+
+  .records-table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 500px !important;
+    width: 100% !important;
+  }
+
+  /* ===== BUTTON FIX ===== */
+
+  button {
+    min-height: 44px !important;
+    border-radius: 12px !important;
+  }
+
+  /* ===== REMOVE HORIZONTAL SCROLL ===== */
+
+  body,
+  html {
+    overflow-x: hidden !important;
+  }
+
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ===== FINAL POLISH ===== */
+
+@media screen and (max-width: 768px) {
+
+  .main-content {
+    padding-top: 14px !important;
+  }
+
+  .card,
+  .attendance-card,
+  .qr-card {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
+  }
+
+  .sidebar-btn.active {
+    transform: scale(1.05);
+  }
 }
