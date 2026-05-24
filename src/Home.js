@@ -1,48 +1,84 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import vitb from "./assets/vitb.png";
 import "./Home.css";
 
 export default function Home() {
+
   const navigate = useNavigate();
+
+  const [installPrompt, setInstallPrompt] = useState(null);
+
+  useEffect(() => {
+
+    const handler = (e) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+    };
+
+  }, []);
 
   return (
     <div>
-      
-      
-      
-         <div className="logo-box">
-    <img src={vitb} alt="college logo" className="hero-logo" />
-    <h2 className="college-name">welcome to vishnu bus attendance</h2>
-  </div>
-       
 
-      
+      <div className="logo-box">
+        <img src={vitb} alt="college logo" className="hero-logo" />
+        <h2 className="college-name">
+          welcome to vishnu bus attendance
+        </h2>
+      </div>
+
       <section className="hero">
-        
 
-       
         <h1>smart Bus attendance</h1>
+
         <p>
-          🚀 Track attendance instantly with QR scanning.  
-          📊 Real-time updates for students and faculty.  
+          🚀 Track attendance instantly with QR scanning.
+          📊 Real-time updates for students and faculty.
           🔐 Secure, fast, and paperless system.
         </p>
 
         <div className="hero-buttons">
+
           <button
-            onClick={() => navigate("/auth", { state: { mode: "signup" } })}
+            onClick={() =>
+              navigate("/auth", { state: { mode: "signup" } })
+            }
             className="get-btn"
           >
             Get Started 🚀
           </button>
 
-         
+          {/* INSTALL BUTTON */}
+
+          {installPrompt && (
+            <button
+              className="install-btn"
+              onClick={async () => {
+                installPrompt.prompt();
+                await installPrompt.userChoice;
+              }}
+            >
+              Install App 📲
+            </button>
+          )}
+
         </div>
+
       </section>
 
       {/* ⭐ Features */}
+
       <section className="features">
+
         <h2>✨ Powerful Features</h2>
+
         <p>Everything you need for smart attendance</p>
 
         <div className="feature-grid">
@@ -68,10 +104,13 @@ export default function Home() {
           </div>
 
         </div>
+
       </section>
 
       {/* 🔄 How It Works */}
+
       <section className="how">
+
         <h2>⚙️ How It Works</h2>
 
         <div className="steps">
@@ -97,9 +136,11 @@ export default function Home() {
           </div>
 
         </div>
+
       </section>
 
       {/* 📞 Footer */}
+
       <footer className="footer">
         <p>💜 Made for Vishnu College</p>
         <p>© 2026 Vishnu Bus Attendance</p>

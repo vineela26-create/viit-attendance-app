@@ -1094,15 +1094,19 @@ html, body {
     margin: 10px auto !important;
   }
 
-  .dashboard-wrapper,
-  .dashboard-content,
-  .faculty-main-content,
-  .main-content {
-    width: calc(100% - 75px) !important;
-    margin-left: 75px !important;
-    padding: 10px !important;
-    overflow-x: hidden !important;
-  }
+  .dashboard-wrapper {
+  display: flex !important;
+}
+
+.dashboard-content,
+.faculty-main-content,
+.main-content {
+  flex: 1 !important;
+  width: auto !important;
+  margin-left: 75px !important;
+  padding: 14px !important;
+  overflow-x: hidden !important;
+}
 
   .stats-grid,
   .summary-stats {
@@ -1110,18 +1114,19 @@ html, body {
   }
 
   .attendance-card,
-  .manual-entry-card,
-  .attendance-summary-card,
-  .total-attendance-card,
-  .records-table-container,
-  .manual-attendance-card,
-  .qr-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 10px 0 !important;
-    padding: 15px !important;
-    box-sizing: border-box;
-  }
+.manual-entry-card,
+.attendance-summary-card,
+.total-attendance-card,
+.records-table-container,
+.manual-attendance-card,
+.qr-card {
+  width: 96% !important;
+  max-width: 96% !important;
+  margin: 12px auto !important;
+  padding: 18px !important;
+  box-sizing: border-box;
+  border-radius: 20px !important;
+}
 
   .stat-number,
   .summary-value {

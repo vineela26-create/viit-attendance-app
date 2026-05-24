@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+
 
 
 export default function FullBusReport() {
@@ -62,20 +62,65 @@ export default function FullBusReport() {
   }, []);
 
   // 🔥 PDF EXPORT
-  const downloadPDF = async () => {
-    const element = reportRef.current;
+const downloadPDF = () => {
 
-    const canvas = await html2canvas(element);
-    const imgData = canvas.toDataURL("image/png");
+  if (!currentDate || !groupedData[currentDate]) {
+    alert("No attendance data");
+    return;
+  }
 
-    const pdf = new jsPDF("p", "mm", "a4");
+  try {
 
-    const imgWidth = 190;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const pdf = new jsPDF();
 
-    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-    pdf.save("Attendance_Report.pdf");
-  };
+    pdf.setFontSize(18);
+
+    pdf.text("Attendance Report", 20, 20);
+
+    let y = 40;
+
+    Object.keys(groupedData[currentDate]).forEach((bus) => {
+
+      pdf.setFontSize(14);
+
+      pdf.text(`Bus No: ${bus}`, 20, y);
+
+      y += 10;
+
+      const colleges = groupedData[currentDate][bus];
+
+      Object.keys(colleges).forEach((col) => {
+
+        pdf.text(
+          `${col}  Male:${colleges[col].Male}  Female:${colleges[col].Female}`,
+          25,
+          y
+        );
+
+        y += 8;
+
+      });
+
+      y += 10;
+
+    });
+
+    // ✅ UNIVERSAL ANDROID FIX
+    const blob = pdf.output("blob");
+
+    const url = URL.createObjectURL(blob);
+
+    window.open(url, "_blank");
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert("PDF failed");
+
+  }
+
+};
 
   const currentDate = Object.keys(groupedData)[0];
 
