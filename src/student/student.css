@@ -355,8 +355,11 @@ body,
 /* Layout */
 .profile-grid {
   display: grid;
-  grid-template-columns: 130px 1fr;  /* smaller image column */
-  gap: 28px;
+
+  grid-template-columns: 1fr;
+
+  gap: 20px;
+
   align-items: center;
 }
 
@@ -1719,17 +1722,26 @@ body,
   /* ===== CARD CENTER ===== */
 
   .attendance-card,
-  .card,
-  .profile-card,
-  .qr-card,
-  .manual-entry-card {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
+.card,
+.profile-card,
+.qr-card,
+.manual-entry-card {
 
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    padding: 22px !important;
+
+    margin: 12px auto !important;
+
+    border-radius: 22px !important;
+
+    box-sizing: border-box !important;
+
+    display: block !important;
+
+}
   /* ===== TABLE FIX ===== */
 
   .records-table-container {
