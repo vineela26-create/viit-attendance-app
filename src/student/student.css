@@ -1504,12 +1504,18 @@ body,
   /* ===== MAIN CONTENT ===== */
 
   .main-content {
-    width: calc(100% - 72px) !important;
-    max-width: calc(100% - 72px) !important;
-    margin-left: 0 !important;
-    padding: 10px !important;
-    overflow-x: hidden !important;
-  }
+
+  width: 100% !important;
+
+  max-width: 100% !important;
+
+  margin-left: 0 !important;
+
+  padding: 12px !important;
+
+  overflow-x: hidden !important;
+
+}
 
   .content-wrapper {
     width: 100% !important;
@@ -1518,19 +1524,27 @@ body,
   /* ===== CARDS ===== */
 
   .card,
-  .attendance-card,
-  .qr-card,
-  .qr-display-card,
-  .attendance-marking-card,
-  .profile-card,
-  .manual-entry-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 16px !important;
-    margin: 10px 0 !important;
-    border-radius: 18px !important;
-    box-sizing: border-box !important;
-  }
+.attendance-card,
+.qr-card,
+.qr-display-card,
+.attendance-marking-card,
+.profile-card,
+.manual-entry-card,
+.records-table-container {
+
+  width: calc(100vw - 95px) !important;
+
+  max-width: calc(100vw - 95px) !important;
+
+  padding: 22px !important;
+
+  margin: 12px auto !important;
+
+  border-radius: 22px !important;
+
+  box-sizing: border-box !important;
+
+}
 
   /* ===== HEADINGS ===== */
 

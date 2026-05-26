@@ -3,7 +3,7 @@ import "../auth.css";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-
+  sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
@@ -88,7 +88,32 @@ export default function AuthPage() {
       );
     }
   };
+  const handleForgotPassword = async () => {
 
+  const emailInput = document.querySelector('input[name="email"]');
+
+  const email = emailInput?.value.trim();
+
+  if (!email) {
+    alert("Please enter your email first");
+    return;
+  }
+
+  try {
+
+    await sendPasswordResetEmail(auth, email);
+
+    alert("Password reset email sent successfully!");
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert("Failed to send reset email");
+
+  }
+
+};
 
   // LOGIN
   const handleLogin = async (e) => {
@@ -113,6 +138,7 @@ export default function AuthPage() {
         await signOut(auth);
         return;
       }
+     
 
       const userData = userSnap.data();
      if (userData.role === "student") {
@@ -237,6 +263,21 @@ export default function AuthPage() {
           <button className="main-btn">
             {isLogin ? "Login" : "Signup"}
           </button>
+          {isLogin && (
+  <p
+    onClick={handleForgotPassword}
+    style={{
+      marginTop: "12px",
+      color: "#2563eb",
+      cursor: "pointer",
+      textAlign: "center",
+      fontSize: "14px",
+      fontWeight: "500",
+    }}
+  >
+    Forgot Password?
+  </p>
+)}
         </form>
       </div>
       </div>
