@@ -7,22 +7,43 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  const [installPrompt, setInstallPrompt] = useState(null);
+  
 
   useEffect(() => {
 
-    const handler = (e) => {
-      e.preventDefault();
-      setInstallPrompt(e);
-    };
+  const handler = (e) => {
 
-    window.addEventListener("beforeinstallprompt", handler);
+    e.preventDefault();
 
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-    };
+    setInstallPrompt(e);
 
-  }, []);
+    // AUTO SHOW INSTALL POPUP
+
+    setTimeout(async () => {
+
+      if (e) {
+
+        e.prompt();
+
+        const choice = await e.userChoice;
+
+        console.log(choice.outcome);
+
+      }
+
+    }, 2000);
+
+  };
+
+  window.addEventListener("beforeinstallprompt", handler);
+
+  return () => {
+
+    window.removeEventListener("beforeinstallprompt", handler);
+
+  };
+
+}, []);
 
   return (
     <div>
@@ -57,17 +78,8 @@ export default function Home() {
 
           {/* INSTALL BUTTON */}
 
-          {installPrompt && (
-            <button
-              className="install-btn"
-              onClick={async () => {
-                installPrompt.prompt();
-                await installPrompt.userChoice;
-              }}
-            >
-              Install App 📲
-            </button>
-          )}
+          
+  
 
         </div>
 
