@@ -5,8 +5,10 @@ import { db } from "../firebase/firebase";
 
 // ✅ Calculate PRESENT DAYS only
 const calculatePresentDays = async (selectedMonth, selectedYear, regNo) => {
+
   const daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
-  let presentDays = 0;
+
+  const promises = [];
 
   for (let day = 1; day <= daysInMonth; day++) {
 
@@ -14,12 +16,21 @@ const calculatePresentDays = async (selectedMonth, selectedYear, regNo) => {
       .toISOString()
       .split("T")[0];
 
-    console.log("Checking:", dateStr);
+    promises.push(
+      getDoc(doc(db, "attendance", dateStr))
+    );
+  }
 
-    const snap = await getDoc(doc(db, "attendance", dateStr));
+  const snapshots = await Promise.all(promises);
+
+  let presentDays = 0;
+
+  snapshots.forEach((snap) => {
 
     if (snap.exists()) {
+
       const data = snap.data();
+
       const presentList = data.presentList || [];
 
       const isPresent = presentList.some(
@@ -27,8 +38,10 @@ const calculatePresentDays = async (selectedMonth, selectedYear, regNo) => {
       );
 
       if (isPresent) presentDays++;
+
     }
-  }
+
+  });
 
   return presentDays;
 };
@@ -64,8 +77,7 @@ export default function AttendanceOverview({ regNo }) {
     { value: 12, label: "December" },
   ];
 
-  const years = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - 2 + i);
-
+  const years = Array.from({ length: 15 }, (_, i) => 2020 + i);
   useEffect(() => {
   let cancelled = false;
 
