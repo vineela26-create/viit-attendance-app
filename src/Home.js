@@ -7,10 +7,15 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  // INSTALL APP STATE
+  // INSTALL APP STATES
+
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
-  // INSTALL APP EVENT
+  const [showInstallBanner, setShowInstallBanner] =
+    useState(false);
+
+  // INSTALL EVENT
+
   useEffect(() => {
 
     const handler = (e) => {
@@ -19,13 +24,21 @@ export default function Home() {
 
       setDeferredPrompt(e);
 
+      setShowInstallBanner(true);
+
     };
 
-    window.addEventListener("beforeinstallprompt", handler);
+    window.addEventListener(
+      "beforeinstallprompt",
+      handler
+    );
 
     return () => {
 
-      window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handler
+      );
 
     };
 
@@ -34,6 +47,34 @@ export default function Home() {
   return (
 
     <div>
+
+      {/* INSTALL BANNER */}
+
+      {showInstallBanner && deferredPrompt && (
+
+        <div className="install-banner">
+
+          <span>
+            📲 Install VITB Attendance App
+          </span>
+
+          <button
+            onClick={async () => {
+
+              deferredPrompt.prompt();
+
+              await deferredPrompt.userChoice;
+
+              setShowInstallBanner(false);
+
+            }}
+          >
+            Install
+          </button>
+
+        </div>
+
+      )}
 
       {/* LOGO */}
 
@@ -65,38 +106,16 @@ export default function Home() {
 
         <div className="hero-buttons">
 
-          {/* GET STARTED */}
-
           <button
             onClick={() =>
-              navigate("/auth", { state: { mode: "signup" } })
+              navigate("/auth", {
+                state: { mode: "signup" },
+              })
             }
             className="get-btn"
           >
             Get Started 🚀
           </button>
-
-          {/* INSTALL APP BUTTON */}
-
-          {deferredPrompt && (
-
-            <button
-              className="install-btn"
-              onClick={async () => {
-
-                deferredPrompt.prompt();
-
-                const choice =
-                  await deferredPrompt.userChoice;
-
-                console.log(choice.outcome);
-
-              }}
-            >
-              Install App 📲
-            </button>
-
-          )}
 
         </div>
 
@@ -115,31 +134,43 @@ export default function Home() {
         <div className="feature-grid">
 
           <div className="feature-card">
+
             <h3>📷 QR Scan</h3>
+
             <p>
               Scan QR codes to mark attendance instantly.
             </p>
+
           </div>
 
           <div className="feature-card">
+
             <h3>⚡ Real-Time</h3>
+
             <p>
               Attendance updates immediately in database.
             </p>
+
           </div>
 
           <div className="feature-card">
+
             <h3>📊 Reports</h3>
+
             <p>
               View attendance records anytime easily.
             </p>
+
           </div>
 
           <div className="feature-card">
+
             <h3>🔐 Secure</h3>
+
             <p>
               Firebase authentication ensures safety.
             </p>
+
           </div>
 
         </div>
@@ -155,23 +186,43 @@ export default function Home() {
         <div className="steps">
 
           <div className="step">
+
             <h3>1️⃣ Generate QR</h3>
-            <p>Faculty creates session QR code</p>
+
+            <p>
+              Faculty creates session QR code
+            </p>
+
           </div>
 
           <div className="step">
+
             <h3>2️⃣ Scan</h3>
-            <p>Students scan using mobile</p>
+
+            <p>
+              Students scan using mobile
+            </p>
+
           </div>
 
           <div className="step">
+
             <h3>3️⃣ Record</h3>
-            <p>Attendance saved instantly</p>
+
+            <p>
+              Attendance saved instantly
+            </p>
+
           </div>
 
           <div className="step">
+
             <h3>4️⃣ View</h3>
-            <p>Check records anytime</p>
+
+            <p>
+              Check records anytime
+            </p>
+
           </div>
 
         </div>
