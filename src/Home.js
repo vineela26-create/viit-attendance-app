@@ -7,57 +7,55 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  
+  // INSTALL APP STATE
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
 
+  // INSTALL APP EVENT
   useEffect(() => {
 
-  const handler = (e) => {
+    const handler = (e) => {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    setInstallPrompt(e);
+      setDeferredPrompt(e);
 
-    // AUTO SHOW INSTALL POPUP
+    };
 
-    setTimeout(async () => {
+    window.addEventListener("beforeinstallprompt", handler);
 
-      if (e) {
+    return () => {
 
-        e.prompt();
+      window.removeEventListener("beforeinstallprompt", handler);
 
-        const choice = await e.userChoice;
+    };
 
-        console.log(choice.outcome);
-
-      }
-
-    }, 2000);
-
-  };
-
-  window.addEventListener("beforeinstallprompt", handler);
-
-  return () => {
-
-    window.removeEventListener("beforeinstallprompt", handler);
-
-  };
-
-}, []);
+  }, []);
 
   return (
+
     <div>
 
+      {/* LOGO */}
+
       <div className="logo-box">
-        <img src={vitb} alt="college logo" className="hero-logo" />
+
+        <img
+          src={vitb}
+          alt="college logo"
+          className="hero-logo"
+        />
+
         <h2 className="college-name">
-          welcome to vishnu bus attendance
+          Welcome to Vishnu Bus Attendance
         </h2>
+
       </div>
+
+      {/* HERO */}
 
       <section className="hero">
 
-        <h1>smart Bus attendance</h1>
+        <h1>Smart Bus Attendance</h1>
 
         <p>
           🚀 Track attendance instantly with QR scanning.
@@ -66,6 +64,8 @@ export default function Home() {
         </p>
 
         <div className="hero-buttons">
+
+          {/* GET STARTED */}
 
           <button
             onClick={() =>
@@ -76,50 +76,77 @@ export default function Home() {
             Get Started 🚀
           </button>
 
-          {/* INSTALL BUTTON */}
+          {/* INSTALL APP BUTTON */}
 
-          
-  
+          {deferredPrompt && (
+
+            <button
+              className="install-btn"
+              onClick={async () => {
+
+                deferredPrompt.prompt();
+
+                const choice =
+                  await deferredPrompt.userChoice;
+
+                console.log(choice.outcome);
+
+              }}
+            >
+              Install App 📲
+            </button>
+
+          )}
 
         </div>
 
       </section>
 
-      {/* ⭐ Features */}
+      {/* FEATURES */}
 
       <section className="features">
 
         <h2>✨ Powerful Features</h2>
 
-        <p>Everything you need for smart attendance</p>
+        <p>
+          Everything you need for smart attendance
+        </p>
 
         <div className="feature-grid">
 
           <div className="feature-card">
             <h3>📷 QR Scan</h3>
-            <p>Scan QR codes to mark attendance instantly.</p>
+            <p>
+              Scan QR codes to mark attendance instantly.
+            </p>
           </div>
 
           <div className="feature-card">
             <h3>⚡ Real-Time</h3>
-            <p>Attendance updates immediately in database.</p>
+            <p>
+              Attendance updates immediately in database.
+            </p>
           </div>
 
           <div className="feature-card">
             <h3>📊 Reports</h3>
-            <p>View attendance records anytime easily.</p>
+            <p>
+              View attendance records anytime easily.
+            </p>
           </div>
 
           <div className="feature-card">
             <h3>🔐 Secure</h3>
-            <p>Firebase authentication ensures safety.</p>
+            <p>
+              Firebase authentication ensures safety.
+            </p>
           </div>
 
         </div>
 
       </section>
 
-      {/* 🔄 How It Works */}
+      {/* HOW IT WORKS */}
 
       <section className="how">
 
@@ -151,13 +178,18 @@ export default function Home() {
 
       </section>
 
-      {/* 📞 Footer */}
+      {/* FOOTER */}
 
       <footer className="footer">
+
         <p>💜 Made for Vishnu College</p>
+
         <p>© 2026 Vishnu Bus Attendance</p>
+
       </footer>
 
     </div>
+
   );
+
 }
