@@ -39,12 +39,12 @@ html, body {
 }
 
 .dashboard-content {
-  width: 100%;
+  width: calc(100% - 280px);
+  margin-left: 280px;
   margin-top: 70px;
-  margin-left: 0;
   padding: 16px;
-  display: flex;
-  justify-content: center;
+  display: block;
+  box-sizing: border-box;
 }
 /* ================= TOP BAR ================= */
 .faculty-topbar {
@@ -274,18 +274,19 @@ html, body {
 
 /* ================= MAIN CONTENT ================= */
 .faculty-main-content {
-  width: 100%;
-  margin-left: 0;
+  width: calc(100% - 280px);
+  margin-left: 280px;
   margin-top: 70px;
   padding: 16px;
   overflow: auto;
+  box-sizing: border-box;
 }
 /* ================= FACULTY DASHBOARD ================= */
 .faculty-dashboard {
   width: 100%;
   display: flex;            /* 🔥 change */
   flex-direction: column;
-  align-items: center;      /* 🔥 center card */
+  align-items: stretch;      /* 🔥 center card */
 }
 
 .faculty-dashboard h1 {
@@ -1101,11 +1102,19 @@ html, body {
 .dashboard-content,
 .faculty-main-content,
 .main-content {
-  flex: 1 !important;
-  width: auto !important;
+
+  width: calc(100% - 75px) !important;
+
+  max-width: calc(100% - 75px) !important;
+
   margin-left: 75px !important;
+
   padding: 14px !important;
+
   overflow-x: hidden !important;
+
+  box-sizing: border-box !important;
+
 }
 
   .stats-grid,
@@ -1120,8 +1129,8 @@ html, body {
 .records-table-container,
 .manual-attendance-card,
 .qr-card {
-  width: 96% !important;
-  max-width: 96% !important;
+  width: 100% !important;
+max-width: 100% !important;
   margin: 12px auto !important;
   padding: 18px !important;
   box-sizing: border-box;
@@ -1261,4 +1270,25 @@ html, body {
   align-items: center;
   border-top: 1px solid #ddd;
   z-index: 1000;
+}
+@media screen and (min-width: 769px) {
+
+  .dashboard-content,
+  .faculty-main-content,
+  .attendance-records-page {
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+  }
+
+  .attendance-card,
+  .attendance-summary-card,
+  .records-table-container {
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+  }
+
 }
