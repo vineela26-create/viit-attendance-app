@@ -31,24 +31,23 @@ const StudentAttendance = () => {
     let scanner;
 
     if (isScanning) {
-      scanner = new Html5QrcodeScanner(
+     scanner = new Html5QrcodeScanner(
   "qr-reader",
   {
-    fps: 20,
-    qrbox: { width: 220, height: 220 },
+    fps: 10,
+    qrbox: { width: 280, height: 280 },
     aspectRatio: 1.0,
     rememberLastUsedCamera: true,
-    supportedScanTypes: [],
   },
   false
 );
 
       scanner.render(
   async (decodedText) => {
-    await scanner.clear();
-    setIsScanning(false);
+    const sessionId = extractSessionId(decodedText);
 
-   const sessionId = extractSessionId(decodedText);
+await scanner.clear();
+setIsScanning(false);
 
 if (!sessionId.startsWith("SESSION-")) {
 
