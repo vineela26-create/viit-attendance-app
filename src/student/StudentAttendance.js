@@ -48,9 +48,19 @@ const StudentAttendance = () => {
     await scanner.clear();
     setIsScanning(false);
 
-    const sessionId = extractSessionId(decodedText);
-    setSessionInput(sessionId);
-    markAttendance(sessionId);
+   const sessionId = extractSessionId(decodedText);
+
+if (!sessionId.startsWith("SESSION-")) {
+
+  setMessage("❌ Invalid Faculty QR");
+  setSuccess(false);
+
+  return;
+
+}
+
+setSessionInput(sessionId);
+markAttendance(sessionId);
   },
   undefined
 );
@@ -93,6 +103,8 @@ const StudentAttendance = () => {
       // 🔹 Get student data
       const studentRef = doc(db, "students", regNo);
       const studentSnap = await getDoc(studentRef);
+      
+
 
       if (!studentSnap.exists()) {
         setMessage("❌ Student not found");
@@ -105,6 +117,14 @@ const StudentAttendance = () => {
       // 🔹 Get today's attendance
       const attendanceRef = doc(db, "attendance", today);
       const attendanceSnap = await getDoc(attendanceRef);
+      if (
+  attendanceSnap.exists() &&
+  attendanceSnap.data().sessionId !== sessionId
+) {
+  setMessage("❌ Wrong Faculty QR");
+  setSuccess(false);
+  return;
+}
 
       const list = attendanceSnap.exists()
         ? attendanceSnap.data().presentList || []
