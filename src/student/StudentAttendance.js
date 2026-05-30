@@ -116,14 +116,8 @@ markAttendance(sessionId);
       // 🔹 Get today's attendance
       const attendanceRef = doc(db, "attendance", today);
       const attendanceSnap = await getDoc(attendanceRef);
-      if (
-  attendanceSnap.exists() &&
-  attendanceSnap.data().sessionId !== sessionId
-) {
-  setMessage("❌ Wrong Faculty QR");
-  setSuccess(false);
-  return;
-}
+      
+
 
       const list = attendanceSnap.exists()
         ? attendanceSnap.data().presentList || []
